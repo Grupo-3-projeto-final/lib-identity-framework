@@ -1,5 +1,5 @@
 ﻿using IdentityGama.Interface.Authorization;
-using IdentityGamaFramework.Utils;
+using System.Configuration;
 using System.Net.Http;
 
 namespace IdentityGama.Authorization
@@ -15,7 +15,7 @@ namespace IdentityGama.Authorization
 
         public bool IsAuthorized(string token, string role)
         {
-            string validationUrl = $"{Configuration.ValueAppSettings("URLIdentityServer")}/valid-role-token";
+            string validationUrl = $"{ConfigurationManager.AppSettings["URLIdentityServer"]}/valid-role-token";
             var request = new HttpRequestMessage(HttpMethod.Head, validationUrl);
             request.Headers.Add("Authorization", $"Bearer {token}");
             request.Headers.Add("Role", role);

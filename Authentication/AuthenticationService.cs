@@ -1,5 +1,5 @@
 ﻿using IdentityGamaFramework.Authentication.Interface;
-using IdentityGamaFramework.Utils;
+using System.Configuration;
 using System.Net.Http;
 
 namespace IdentityGama.Authentication
@@ -15,7 +15,7 @@ namespace IdentityGama.Authentication
 
         public bool IsAuthenticated(string token)
         {
-            var validationUrl = $"{Configuration.ValueAppSettings("URLIdentityServer")}/valid-token";
+            var validationUrl = $"{ConfigurationManager.AppSettings["URLIdentityServer"]}/valid-token";
             var request = new HttpRequestMessage(HttpMethod.Head, validationUrl);
             request.Headers.Add("Authorization", $"Bearer {token}");
 
